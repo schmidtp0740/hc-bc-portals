@@ -16,14 +16,13 @@ export const fetchPatients = () => async dispatch => {
 };
 
 
-export const fetchOnePatient = (option) => async dispatch => {
+export const fetchOnePatient = () => async dispatch => {
     try {
-        const res = await axios.get(`url/${option}`);
+        const res = await axios.get("http://private-aad273-ironbankbcsapidoc.apiary-mock.com/pd/john");
         dispatch({
             type: FETCH_ONE_PATIENT,
             payload: res.data
         })
-        console.log(res.data + " Here");
     } catch (e) {
         console.error(e);
     }
