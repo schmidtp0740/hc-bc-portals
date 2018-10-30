@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card, List, Avatar } from 'antd';
 import { connect } from "react-redux";
 import * as actions from "../../actions/patientActionIndex";
 import {fetchOnePatient} from "../../actions/patientActionIndex";
