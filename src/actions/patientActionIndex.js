@@ -9,7 +9,7 @@ export const fetchPatients = () => async dispatch => {
         dispatch({
             type: FETCH_PATIENTS,
             payload: res.data
-        })
+        });
     } catch (e) {
         console.error(e);
     }

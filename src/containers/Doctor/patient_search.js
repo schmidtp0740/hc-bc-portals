@@ -10,31 +10,28 @@ class DoctorSearch extends Component {
         this.props.fetchPatients();
     }
 
-    handleChange() {
-        this.fetchOnePatient();
+    handleChange = (value) => {
+        this.props.fetchOnePatient(value);
     }
 
 
     render() {
-        if (this.props.data) {
+        // if (this.props.allPatients) {
+        //     console.log(this.props.allPatients);
+        //     // let options = this.props.allPatients.data.map(d => <Option value={`${d.firstName}/${d.lastName}`}key={d.id}>{d.firstName}</Option>);
             return (
-                <Select
-                    mode="default"
-                    placeholder="Select users"
-                    filterOption={false}
-                    style={{width: '200px'}}
-                    onChange={this.handleChange}>
-                    {this.props.data.persons.map(d => <Option value={`${d.firstName}/${d.lastName}`}>${d.firstName}</Option>)}
-
-                 </Select>
-             )
-         }
-        return (<span>No Patients</span>);
-    }
+                <div>
+                    <Select defaultValue="Select users" onChange={this.handleChange} style={{width: '200px'}}>
+                        <Option value="John" key="John">John</Option>
+                        <Option value="Mary" key="Mary">Mary</Option>
+                    </Select>
+                </div>
+            )
+        }
 }
 
-const mapStateToProps = ({ patient }) => {
-    return { patient };
+const mapStateToProps = ({allPatients, onePatient}) => {
+    return {allPatients, onePatient};
 };
 
 
