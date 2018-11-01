@@ -2,9 +2,32 @@ import React, { Component } from 'react';
 import { Modal, Button, Form, Input } from 'antd';
 
 const FormItem = Form.Item;
+const formItemLayout = {
+    labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 },
+    },
+    wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 },
+    },
+};
+
+const tailFormItemLayout = {
+    wrapperCol: {
+        xs: {
+            span: 24,
+            offset: 0,
+        },
+        sm: {
+            span: 16,
+            offset: 8,
+        },
+    },
+};
 
 
-class NewRX1 extends Component {
+class NewRx extends Component {
   state = { visible: false }
 
   showModal = () => {
@@ -36,28 +59,6 @@ class NewRX1 extends Component {
   }
 
   render() {
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-      },
-    };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
-      },
-    };
     const { getFieldDecorator } = this.props.form;
     return (
       <div>
@@ -82,7 +83,7 @@ class NewRX1 extends Component {
         >
           {getFieldDecorator('doctor', {
             rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
+              type: 'name', message: '',
             }, {
               required: true, message: 'Please input your E-mail!',
             }],
@@ -96,9 +97,9 @@ class NewRX1 extends Component {
         >
           {getFieldDecorator('license', {
             rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
+              type: 'number', message: 'Must be in #00-000-0000 format',
             }, {
-              required: true, message: 'Please input your E-mail!',
+              required: true, message: 'Enter valid license number.',
             }],
           })(
             <Input />
@@ -109,11 +110,7 @@ class NewRX1 extends Component {
           label="Prescription"
         >
           {getFieldDecorator('prescription', {
-            rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
-            }, {
-              required: true, message: 'Please input your E-mail!',
-            }],
+
           })(
             <Input />
           )}
@@ -124,16 +121,15 @@ class NewRX1 extends Component {
         >
           {getFieldDecorator('refills', {
             rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
+              type: 'number', message: '3 or more refills require additional visit',
             }, {
-              required: true, message: 'Please input your E-mail!',
+              required: true, message: 'Enter number of refills',
             }],
           })(
             <Input />
           )}
         </FormItem>
         <FormItem {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">Register</Button>
         </FormItem>
       </Form>
         </Modal>
@@ -141,5 +137,5 @@ class NewRX1 extends Component {
     );
   }
 }
-const NewRX = Form.create()(NewRX1);
+const NewRX = Form.create()(NewRx);
 export default NewRX;

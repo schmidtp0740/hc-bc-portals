@@ -1,10 +1,10 @@
 import {combineReducers} from "redux";
-import allPatients from "./patientReducer";
+import allPatients from "./allPatientsReducer";
 import onePatient from "./onePatientReducer";
-import rx from "./rxReducer";
+import rxHistory from "./rxReducer";
 
 export default combineReducers({
     onePatient,
     allPatients,
-    rx
+    rxHistory
 });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Select } from 'antd';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/patientActionIndex';
+import * as actions from '../actions/patientActionIndex';
 
 const Option = Select.Option;
 
@@ -12,22 +12,23 @@ class DoctorSearch extends Component {
 
     handleChange = (value) => {
         this.props.fetchOnePatient(value);
-    }
+    };
 
 
     render() {
-        // if (this.props.allPatients) {
-        //     console.log(this.props.allPatients);
-        //     // let options = this.props.allPatients.data.map(d => <Option value={`${d.firstName}/${d.lastName}`}key={d.id}>{d.firstName}</Option>);
+        if (this.props.allPatients.data.people) {
             return (
                 <div>
                     <Select defaultValue="Select users" onChange={this.handleChange} style={{width: '200px'}}>
-                        <Option value="John" key="John">John</Option>
-                        <Option value="Mary" key="Mary">Mary</Option>
+                        {this.props.allPatients.data.people.map(d => <Option value={d.patientID} key={d.patientID}>{d.firstName}</Option>)}
                     </Select>
                 </div>
             )
         }
+        return (
+            <div>Select a patient</div>
+        )
+    }
 }
 
 const mapStateToProps = ({allPatients, onePatient}) => {
