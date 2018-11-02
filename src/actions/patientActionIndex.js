@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {FETCH_ONE_PATIENT, FETCH_PATIENTS} from './types';
 
-const url = "http://private-aad273-ironbankbcsapidoc.apiary-mock.com/pd";
+const url = "http://129.213.66.90:8080/pd";
 
 export const fetchPatients = () => async dispatch => {
     try {
@@ -9,16 +9,16 @@ export const fetchPatients = () => async dispatch => {
         dispatch({
             type: FETCH_PATIENTS,
             payload: res.data
-        })
+        });
     } catch (e) {
         console.error(e);
     }
 };
 
 
-export const fetchOnePatient = () => async dispatch => {
+export const fetchOnePatient = (id) => async dispatch => {
     try {
-        const res = await axios.get("http://private-aad273-ironbankbcsapidoc.apiary-mock.com/pd/john");
+        const res = await axios.get(`${url}/${id}`);
         dispatch({
             type: FETCH_ONE_PATIENT,
             payload: res.data

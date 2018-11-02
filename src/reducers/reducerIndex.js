@@ -1,10 +1,12 @@
-import {combineReducers} from "redux";
-import allPatients from "./patientReducer";
-import onePatient from "./onePatientReducer";
-import rx from "./rxReducer";
+import {combineReducers} from 'redux';
+import allPatients from './allPatientsReducer';
+import onePatient from './onePatientReducer';
+import rxHistory from './rxReducer';
+import submitRx from './submitRxReducer';
 
 export default combineReducers({
     onePatient,
     allPatients,
-    rx
+    rxHistory,
+    submitRx
 });
