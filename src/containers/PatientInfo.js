@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import * as actions from "../actions/patientActionIndex";
-import {fetchRxHistory} from "../actions/rxActionIndex";
 import '../css/PatientInfo.css';
 
  class PatientInfo extends Component {
-     componentDidUpdate() {
-         fetchRxHistory(this.props.onePatient.data.patientID);
-     }
 
      renderPatient = () => {
          if (this.props.onePatient.data) {

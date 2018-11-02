@@ -16,15 +16,12 @@ export default class Nav extends Component {
                             <Link to='/'>Home</Link>
                         </Menu.Item>
                         <Menu.Item key="2">
-                            <Link to='/patient'>Patients</Link>
-                        </Menu.Item>
-                        <Menu.Item key="3">
                             <Link to='/doctor'>Doctor</Link>
                         </Menu.Item>
-                        <Menu.Item key="4">
+                        <Menu.Item key="3">
                             <Link to='/pharmacist'>Pharmacist</Link>
                         </Menu.Item>
-                        <Menu.Item key="5">
+                        <Menu.Item key="4">
                             <Link to='/insurance'>Insurance</Link>
                         </Menu.Item>
                     </Menu>

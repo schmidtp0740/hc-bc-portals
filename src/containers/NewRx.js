@@ -1,141 +1,89 @@
-import React, { Component } from 'react';
-import { Modal, Button, Form, Input } from 'antd';
-
-const FormItem = Form.Item;
-const formItemLayout = {
-    labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-    },
-    wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-    },
-};
-
-const tailFormItemLayout = {
-    wrapperCol: {
-        xs: {
-            span: 24,
-            offset: 0,
-        },
-        sm: {
-            span: 16,
-            offset: 8,
-        },
-    },
-};
-
+import {Button} from 'antd';
+import React, {Component} from 'react';
+import RxForm from './Form';
+import {connect} from 'react-redux';
+import * as actions from "../actions/rxActionIndex";
 
 class NewRx extends Component {
-  state = { visible: false }
+    state = {
+        visible: false,
+    };
 
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  }
+    showModal = () => {
+        this.setState({ visible: true });
+    };
 
-  handleOk = (e) => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
-  }
-
-  handleCancel = (e) => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
-  }
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values);
-      }
-    });
-  }
-
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    return (
-      <div>
-        <Button type="default" onClick={this.showModal} icon="plus" size="large" ghost>
-          New Prescription
-        </Button>
-        <Modal
-          title="Basic Modal"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-          okButtonProps={{ disabled: true }}
-          cancelButtonProps={{ disabled: true }}
-        >
+    handleCancel = () => {
+        this.setState({ visible: false });
+    };
 
 
+    handleSubmit = () => {
+        const form = this.formRef.props.form;
+        form.validateFields((err, values) => {
+            if (err) {
+                return;
+            }
 
-        <Form onSubmit={this.handleSubmit}>
-        <FormItem
-          {...formItemLayout}
-          label="Doctor"
-        >
-          {getFieldDecorator('doctor', {
-            rules: [{
-              type: 'name', message: '',
-            }, {
-              required: true, message: 'Please input your E-mail!',
-            }],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="License"
-        >
-          {getFieldDecorator('license', {
-            rules: [{
-              type: 'number', message: 'Must be in #00-000-0000 format',
-            }, {
-              required: true, message: 'Enter valid license number.',
-            }],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Prescription"
-        >
-          {getFieldDecorator('prescription', {
+            form.getFieldsValue();
 
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="Refills"
-        >
-          {getFieldDecorator('refills', {
-            rules: [{
-              type: 'number', message: '3 or more refills require additional visit',
-            }, {
-              required: true, message: 'Enter number of refills',
-            }],
-          })(
-            <Input />
-          )}
-        </FormItem>
-        <FormItem {...tailFormItemLayout}>
-        </FormItem>
-      </Form>
-        </Modal>
-      </div>
-    );
-  }
+            const patient = this.props.onePatient.data;
+            const rxID = this.props.rxHistory.rx.rxList.length;
+
+            const newRx = {
+                "patientID": patient.patientID,
+                "rxid": "rx" + (rxID + 2),
+                "timestamp": Date.now(),
+                "doctor": "Dr. Sanchez",
+                "docLicense": "doc01",
+                "prescription": values.prescription,
+                "refills": parseInt(values.refills),
+                "quantity": parseInt(values.quantity),
+                "status": "prescribed",
+                "expDate": Date.now()
+            };
+
+            console.log(newRx + " values here");
+            this.props.submitRx(newRx);
+
+            form.resetFields();
+            this.setState({ visible: false });
+        });
+    };
+
+    saveFormRef = (formRef) => {
+        this.formRef = formRef;
+    };
+
+    renderButton = () => {
+        if (this.props.onePatient.data) {
+            return (
+            <div>
+                <Button type="primary" onClick={this.showModal}>New Rx</Button>
+                <RxForm
+                    wrappedComponentRef={this.saveFormRef}
+                    visible={this.state.visible}
+                    onCancel={this.handleCancel}
+                    onSubmit={this.handleSubmit}
+                />
+            </div>
+            )
+        }
+        return (
+            <Button type="primary" disabled={true} onClick={this.showModal}>New Rx</Button>
+        )
+    };
+
+    render() {
+        return (
+            this.renderButton()
+        );
+    }
 }
-const NewRX = Form.create()(NewRx);
-export default NewRX;
+
+
+const mapStateToProps = ({ submitRx, onePatient, rxHistory }) => {
+    return { submitRx, onePatient, rxHistory }
+};
+
+export default connect(mapStateToProps, actions)(NewRx);

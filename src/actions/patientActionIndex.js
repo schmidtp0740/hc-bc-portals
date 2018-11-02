@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {FETCH_ONE_PATIENT, FETCH_PATIENTS} from './types';
 
-const url = "http://129.213.196.117:8080/pd";
+const url = "http://129.213.66.90:8080/pd";
 
 export const fetchPatients = () => async dispatch => {
     try {
@@ -18,7 +18,7 @@ export const fetchPatients = () => async dispatch => {
 
 export const fetchOnePatient = (id) => async dispatch => {
     try {
-        const res = await axios.get(url+"/"+id);
+        const res = await axios.get(`${url}/${id}`);
         dispatch({
             type: FETCH_ONE_PATIENT,
             payload: res.data
