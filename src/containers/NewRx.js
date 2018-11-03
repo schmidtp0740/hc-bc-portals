@@ -6,6 +6,11 @@ import * as actions from "../actions/rxActionIndex";
 import moment from "moment";
 
 class NewRx extends Component {
+    componentDidUpdate(prevProps) {
+        if (this.props.rxHistory.rx.length !== prevProps.rxHistory.rx.length) {
+            this.props.fetchRxHistory(this.props.onePatient.data.patientID);
+        }
+    }
     state = {
         visible: false,
     };
