@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
-import { Table } from 'antd';
+import React, {Component} from 'react';
+import {Table} from 'antd';
 import {connect} from 'react-redux';
 import * as actions from '../actions/rxActionIndex';
 
 const columns = [
     {
         title: 'Prescriber', dataIndex: 'doctor', key: 'doctor'
-    },
-    {
-        title: 'License', dataIndex: 'docLicense', key: 'license'
     },
     {
         title: 'Prescription', dataIndex: 'prescription', key: 'prescription'
@@ -24,7 +21,6 @@ const columns = [
     }
 ];
 
-
 class RxHistory extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.onePatient.data.patientID !== prevProps.onePatient.data.patientID) {
@@ -32,23 +28,24 @@ class RxHistory extends Component {
         }
     }
 
+    render() {
+        if (this.props.rxHistory.rx.rxList) {
 
+            let rxHistory = this.props.rxHistory.rx.rxList;
 
-  render() {
-        if (this.props.rxHistory) {
-            return(
-                <Table columns={columns} dataSource={this.props.rxHistory.rx.rxList} />
+            return (
+                <Table columns={columns} rowKey={rxHistory.rxid} dataSource={rxHistory}/>
             )
         }
-        return(
+        return (
             <div>No Data</div>
         )
-  }
+    }
 
 }
 
-const mapStateToProps = ({ onePatient, rxHistory }) => {
-    return { onePatient, rxHistory };
+const mapStateToProps = ({onePatient, rxHistory}) => {
+    return {onePatient, rxHistory};
 };
 
 

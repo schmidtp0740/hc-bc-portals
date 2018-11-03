@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import RxForm from './Form';
 import {connect} from 'react-redux';
 import * as actions from "../actions/rxActionIndex";
+import moment from "moment";
 
 class NewRx extends Component {
     state = {
@@ -10,11 +11,11 @@ class NewRx extends Component {
     };
 
     showModal = () => {
-        this.setState({ visible: true });
+        this.setState({visible: true});
     };
 
     handleCancel = () => {
-        this.setState({ visible: false });
+        this.setState({visible: false});
     };
 
 
@@ -40,14 +41,13 @@ class NewRx extends Component {
                 "refills": parseInt(values.refills),
                 "quantity": parseInt(values.quantity),
                 "status": "prescribed",
-                "expDate": Date.now()
+                "expDate": moment(values.expDate).valueOf()
             };
 
-            console.log(newRx + " values here");
             this.props.submitRx(newRx);
 
             form.resetFields();
-            this.setState({ visible: false });
+            this.setState({visible: false});
         });
     };
 
@@ -58,15 +58,15 @@ class NewRx extends Component {
     renderButton = () => {
         if (this.props.onePatient.data) {
             return (
-            <div>
-                <Button type="primary" onClick={this.showModal}>New Rx</Button>
-                <RxForm
-                    wrappedComponentRef={this.saveFormRef}
-                    visible={this.state.visible}
-                    onCancel={this.handleCancel}
-                    onSubmit={this.handleSubmit}
-                />
-            </div>
+                <div>
+                    <Button type="primary" onClick={this.showModal}>New Rx</Button>
+                    <RxForm
+                        wrappedComponentRef={this.saveFormRef}
+                        visible={this.state.visible}
+                        onCancel={this.handleCancel}
+                        onSubmit={this.handleSubmit}
+                    />
+                </div>
             )
         }
         return (
@@ -82,8 +82,8 @@ class NewRx extends Component {
 }
 
 
-const mapStateToProps = ({ submitRx, onePatient, rxHistory }) => {
-    return { submitRx, onePatient, rxHistory }
+const mapStateToProps = ({submitRx, onePatient, rxHistory}) => {
+    return {submitRx, onePatient, rxHistory}
 };
 
 export default connect(mapStateToProps, actions)(NewRx);

@@ -1,17 +1,15 @@
-import {Form, Input, Modal} from "antd";
+import {DatePicker, Form, Input, Modal} from "antd";
 import React, {Component} from "react";
 import {connect} from 'react-redux';
 import * as actions from '../actions/patientActionIndex';
-
+import InputNumber from "antd/es/input-number";
 
 const FormItem = Form.Item;
 const RxForm = Form.create()(
 class RxForm extends Component {
-
     render() {
         const {visible, onCancel, onSubmit, form} = this.props;
         const {getFieldDecorator} = form;
-        const patient = this.props.onePatient.data;
         return (
             <Modal
                     visible={visible}
@@ -20,20 +18,52 @@ class RxForm extends Component {
                     onCancel={onCancel}
                     onOk={onSubmit}
                 >
-                    <Form layout="vertical">
+                    <Form layout="inline">
                         <FormItem label="Medication">
-                            {getFieldDecorator('prescription')(<Input/>)}
+                            {getFieldDecorator('prescription',
+                                {
+                                    rules: [{
+                                        required: true,
+                                        message: 'Please input the title of collection!'
+                                    }]
+                                })
+                            (<Input/>)}
                         </FormItem>
 
                         <FormItem label="Refills">
-                            {getFieldDecorator('refills')(<Input/>)}
+                            {getFieldDecorator('refills',
+                                {
+                                    rules: [{
+                                        required: true,
+                                        message: 'Max of 10 refills.'
+                                    }]
+                                })
+                            (<InputNumber min={0} max={10}/>)}
                         </FormItem>
 
                         <FormItem label="Quantity">
-                            {getFieldDecorator('quantity')(<Input/>)}
+                            {getFieldDecorator('quantity',
+                                {
+                                    rules: [{
+                                        required: true,
+                                        message: 'Quantity cannot exceed 160.'
+                                    }]
+                                })
+                            (<InputNumber min={0} max={160}/>)}
                         </FormItem>
                         <FormItem label="Exp Date">
-                            {getFieldDecorator('expDate')(<Input/>)}
+                            {getFieldDecorator('expDate',
+                                {
+                                    rules: [{
+                                        required: true,
+                                        message: 'Expiration date must be a minimum of 1 month.'
+                                    }]
+                                })
+                            (<DatePicker
+                                showTime
+                                format="YYYY-MM-DD HH:mm:ss"
+                                placeholder="Select Exp Date"
+                            />)}
                         </FormItem>
                     </Form>
                 </Modal>
