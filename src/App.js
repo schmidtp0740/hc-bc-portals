@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {Router, Route} from "react-router-dom";
+import history from './history';
 import {Layout} from 'antd';
 import { Landing } from './components/Misc/Landing';
 import Doctor from './components/Doctor';
@@ -14,7 +15,7 @@ const { Content } = Layout;
 export default class App extends Component {
     render() {
         return (
-            <Router>
+            <Router history={history}>
                 <Layout className="card-layout">
                     <Nav/>
                     <Content style={{padding: '0 50px', marginTop: 64}}>

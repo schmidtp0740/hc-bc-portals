@@ -16,9 +16,12 @@ export default class Provider extends Component {
                 avatar: '',
                 title: '',
                 description: ''
-            }
+            },
+            patient: ''
         }
-    }
+
+    };
+
     render() {
         return (
             <Layout className="profile-layout" style={{width:'100%', margin: 'auto' }}>
@@ -36,7 +39,7 @@ export default class Provider extends Component {
                             style={{ lineHeight: '64px' }}
                         >
                             <Menu.Item>
-                                <PatientSearch/>
+                                <PatientSearch />
                             </Menu.Item>
                             <Menu.Item style={{float:'right', background:null}}>
                                 <NewRx />
@@ -44,7 +47,7 @@ export default class Provider extends Component {
                         </Menu>
                     </Header>
                     <Content>
-                        <RxHistory/>
+                        <RxHistory />
                     </Content>
                 </Layout>
             </Layout>

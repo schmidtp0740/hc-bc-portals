@@ -5,4 +5,4 @@ export const FETCH_RX_ERROR = 'fetch_rx_error';
 export const SUBMIT_RX = 'submit_rx';
 export const SUBMIT_RX_ERROR = 'submit_rx_error';
 export const FILL_RX = 'fill_rx';
-export const BILL_RX = 'bill_rx';
+export const FETCH_INSURANCE = 'fetch_insurance';

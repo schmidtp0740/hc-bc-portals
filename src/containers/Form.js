@@ -1,17 +1,15 @@
 import {DatePicker, Form, Input, Modal} from "antd";
 import React, {Component} from "react";
-import {connect} from 'react-redux';
-import * as actions from '../actions/patientActionIndex';
 import InputNumber from "antd/es/input-number";
 
 const FormItem = Form.Item;
-const RxForm = Form.create()(
-class RxForm extends Component {
-    render() {
-        const {visible, onCancel, onSubmit, form} = this.props;
-        const {getFieldDecorator} = form;
-        return (
-            <Modal
+export const RxForm = Form.create()(
+    class extends Component {
+        render() {
+            const {visible, onCancel, onSubmit, form} = this.props;
+            const {getFieldDecorator} = form;
+            return (
+                <Modal
                     visible={visible}
                     title="Submit a new Rx"
                     okText={'Submit'}
@@ -26,8 +24,7 @@ class RxForm extends Component {
                                         required: true,
                                         message: 'Please input the title of collection!'
                                     }]
-                                })
-                            (<Input/>)}
+                                })(<Input/>)}
                         </FormItem>
 
                         <FormItem label="Refills">
@@ -37,8 +34,7 @@ class RxForm extends Component {
                                         required: true,
                                         message: 'Max of 10 refills.'
                                     }]
-                                })
-                            (<InputNumber min={0} max={10}/>)}
+                                })(<InputNumber min={0} max={10}/>)}
                         </FormItem>
 
                         <FormItem label="Quantity">
@@ -48,9 +44,9 @@ class RxForm extends Component {
                                         required: true,
                                         message: 'Quantity cannot exceed 160.'
                                     }]
-                                })
-                            (<InputNumber min={0} max={160}/>)}
+                                })(<InputNumber min={0} max={160}/>)}
                         </FormItem>
+
                         <FormItem label="Exp Date">
                             {getFieldDecorator('expDate',
                                 {
@@ -58,24 +54,17 @@ class RxForm extends Component {
                                         required: true,
                                         message: 'Expiration date must be a minimum of 1 month.'
                                     }]
-                                })
-                            (<DatePicker
-                                showTime
-                                format="YYYY-MM-DD HH:mm:ss"
-                                placeholder="Select Exp Date"
-                            />)}
+                                })(<DatePicker
+                                    showTime
+                                    format="YYYY-MM-DD HH:mm:ss"
+                                    placeholder="Select Exp Date"
+                                />)}
                         </FormItem>
                     </Form>
                 </Modal>
-        )
+            )
+        }
     }
-}
 );
-
-const mapStateToProps = ({ onePatient }) => {
-    return { onePatient }
-};
-
-export default connect(mapStateToProps, actions)(RxForm);
 
 
