@@ -1,4 +1,4 @@
-# Prod Dockerfile
+# Dockerfile used for dev
 FROM node:latest
 
 WORKDIR /usr/app/src
@@ -8,10 +8,9 @@ RUN npm install -g serve
 COPY package*.json ./
 RUN npm install
 
-EXPOSE 5000
-CMD ["serve", "-s", "build"]
+EXPOSE 3000
+CMD ["npm", "start"]
 
 COPY public public
 COPY src src
-RUN npm run-script build
 
