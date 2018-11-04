@@ -9,4 +9,6 @@ services:
       - type: bind
         source: ./src
         target: /usr/app/src/src
+  backend:
+    image: schmidtp0740/hc-bc-backend:0.0.7
 
