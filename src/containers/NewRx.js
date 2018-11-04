@@ -1,6 +1,6 @@
 import {Button} from 'antd';
 import React, {Component} from 'react';
-import RxForm from './Form';
+import {RxForm} from './Form';
 import {connect} from 'react-redux';
 import * as actions from "../actions/rxActionIndex";
 import moment from "moment";
