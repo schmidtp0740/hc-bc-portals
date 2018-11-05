@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import * as actions from "../actions/patientActionIndex";
 import '../css/PatientInfo.css';
+import InsuranceFile from "./insuranceFile";
 
  class PatientInfo extends Component {
 
@@ -27,6 +28,7 @@ import '../css/PatientInfo.css';
        return (
            <div className='patient-info'>
             {this.renderPatient()}
+            <InsuranceFile />
            </div>
        );
    };

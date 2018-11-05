@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import moment from 'moment';
+import {Table} from 'antd';
 import {connect} from 'react-redux';
 import * as actions from '../actions/insuranceActionIndex';
 
@@ -9,43 +11,35 @@ class InsuranceFile extends Component {
         }
     }
 
+
     render() {
-        if (this.props.rxHistory.rx.rxList) {
-
-            let rxHistory = this.props.rxHistory.rx.rxList;
-
-            const columns = [
-                {
-                    title: 'Patient ID', dataIndex: 'patientID', key: 'patientID'
-                },
-                {
-                    title: 'Insurance', dataIndex: 'insurance', key: 'insurance'
-                },
-                {
-                    title: 'Insurance Name', dataIndex: 'insurance.insuranceName', key: 'insuranceName'
-                }
-                // {
-                //     title: 'Insurance', dataIndex: 'insurance', key: 'insurance'
-                // },
-                // {
-                //     title: 'Insurance', dataIndex: 'insurance', key: 'insurance'
-                // },
-            ];
-
-
+        if (this.props.insurance.data) {
+            const insurance = this.props.insurance.data.insurance;
             return (
                 <div>
-                    {"patientID":"p01","insurance":{"insuranceName":"gieco","expDate":12345,"policyID":"p0000121"}}
-                    <Table columns={columns} dataSource={rxHistory} />
+                    <label>
+                        Insurance Provider:
+                    </label>
+                    <div>
+                        {insurance.insuranceName}
+                    </div>
+                    <label>
+                        Policy Number:
+                    </label>
+                    <div>
+                        {insurance.policyID}
+                    </div>
+                    <label>
+                        Expiration:
+                    </label>
+                    <div>
+                        {moment(insurance.expDate).format('MM/DD/YYYY')}
+                    </div>
                 </div>
-
             )
         }
-        return (
-            <div>No Data</div>
-        )
+        return null
     }
-
 }
 
 const mapStateToProps = ({onePatient, insurance}) => {
