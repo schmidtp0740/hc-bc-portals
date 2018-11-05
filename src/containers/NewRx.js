@@ -49,9 +49,9 @@ class NewRx extends Component {
                 "expDate": moment(values.expDate).valueOf()
             };
 
-            console.log(newRx.timestamp);
+            console.log(newRx);
 
-            // this.props.submitRx(newRx);
+            this.props.submitRx(newRx);
 
             form.resetFields();
             this.setState({visible: false});
