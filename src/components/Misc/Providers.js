@@ -12,6 +12,7 @@ export default class Provider extends Component {
         super(props);
         this.state = {
             provider: {
+                type: '',
                 cover: '',
                 avatar: '',
                 title: '',
@@ -20,6 +21,16 @@ export default class Provider extends Component {
             patient: ''
         }
 
+    };
+
+    renderRxButton = () => {
+      if (this.props.provider.type === 'doctor') {
+          return (
+              <Menu.Item style={{float:'right', background:null}}>
+                  <NewRx />
+              </Menu.Item>
+          )
+      }
     };
 
     render() {
@@ -41,13 +52,11 @@ export default class Provider extends Component {
                             <Menu.Item>
                                 <PatientSearch />
                             </Menu.Item>
-                            <Menu.Item style={{float:'right', background:null}}>
-                                <NewRx />
-                            </Menu.Item>
+                            {this.renderRxButton()}
                         </Menu>
                     </Header>
                     <Content>
-                        <RxHistory />
+                        <RxHistory provider={this.props.provider.type}/>
                     </Content>
                 </Layout>
             </Layout>

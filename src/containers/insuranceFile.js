@@ -1,28 +1,6 @@
 import React, {Component} from 'react';
-import {Table} from 'antd';
 import {connect} from 'react-redux';
-import * as actions from '../actions/rxActionIndex';
-
-const columns = [
-    {
-        title: 'Name', dataIndex: 'name', key: 'name'
-    },
-    {
-        title: 'Phone', dataIndex: 'phone', key: 'phone'
-    },
-    {
-        title: 'SSN', dataIndex: 'ssn', key: 'ssn'
-    },
-    {
-        title: 'company', dataIndex: 'company', key: 'company'
-    },
-    {
-        title: 'policyId', dataIndex: 'policyId', key: 'policyId'
-    },
-    {
-        title: 'EXP Date', dataIndex: 'expiraionDate', key: 'expiraionDate'
-    }
-];
+import * as actions from '../actions/insuranceActionIndex';
 
 class InsuranceFile extends Component {
     componentDidUpdate(prevProps) {
@@ -36,8 +14,31 @@ class InsuranceFile extends Component {
 
             let rxHistory = this.props.rxHistory.rx.rxList;
 
+            const columns = [
+                {
+                    title: 'Patient ID', dataIndex: 'patientID', key: 'patientID'
+                },
+                {
+                    title: 'Insurance', dataIndex: 'insurance', key: 'insurance'
+                },
+                {
+                    title: 'Insurance Name', dataIndex: 'insurance.insuranceName', key: 'insuranceName'
+                }
+                // {
+                //     title: 'Insurance', dataIndex: 'insurance', key: 'insurance'
+                // },
+                // {
+                //     title: 'Insurance', dataIndex: 'insurance', key: 'insurance'
+                // },
+            ];
+
+
             return (
-                <Table columns={columns} rowKey={rxHistory.rxid} dataSource={rxHistory}/>
+                <div>
+                    {"patientID":"p01","insurance":{"insuranceName":"gieco","expDate":12345,"policyID":"p0000121"}}
+                    <Table columns={columns} dataSource={rxHistory} />
+                </div>
+
             )
         }
         return (
@@ -47,8 +48,8 @@ class InsuranceFile extends Component {
 
 }
 
-const mapStateToProps = ({onePatient}) => {
-    return {onePatient};
+const mapStateToProps = ({onePatient, insurance}) => {
+    return {onePatient, insurance};
 };
 
 

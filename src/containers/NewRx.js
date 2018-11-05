@@ -34,11 +34,11 @@ class NewRx extends Component {
             form.getFieldsValue();
 
             const patient = this.props.onePatient.data;
-            const rxID = this.props.rxHistory.rx.rxList.length;
+            const rxID = this.props.rxHistory.rx.rxList ? `rx${this.props.rxHistory.rx.rxList.length + 1}` : `rx${1}`;
 
             const newRx = {
                 "patientID": patient.patientID,
-                "rxid": "rx" + (rxID + 2),
+                "rxid": rxID,
                 "timestamp": Date.now(),
                 "doctor": "Dr. Sanchez",
                 "docLicense": "doc01",

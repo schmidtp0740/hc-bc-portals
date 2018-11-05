@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {
     FETCH_RX_HISTORY,
-    SUBMIT_RX
-    // FILL_RX,
+    SUBMIT_RX,
+    FILL_RX,
     // BILL_RX
 } from './types';
 
@@ -26,6 +26,19 @@ export const submitRx = (data) => async (dispatch) => {
 
         dispatch({
             type: SUBMIT_RX,
+            payload: res.data
+        })
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+export const fillRx = (data) => async (dispatch) => {
+    try {
+        const res = await axios.patch(url, data);
+
+        dispatch({
+            type: FILL_RX,
             payload: res.data
         })
     } catch (e) {
