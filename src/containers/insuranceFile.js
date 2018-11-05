@@ -1,28 +1,8 @@
 import React, {Component} from 'react';
+import moment from 'moment';
 import {Table} from 'antd';
 import {connect} from 'react-redux';
-import * as actions from '../actions/rxActionIndex';
-
-const columns = [
-    {
-        title: 'Name', dataIndex: 'name', key: 'name'
-    },
-    {
-        title: 'Phone', dataIndex: 'phone', key: 'phone'
-    },
-    {
-        title: 'SSN', dataIndex: 'ssn', key: 'ssn'
-    },
-    {
-        title: 'company', dataIndex: 'company', key: 'company'
-    },
-    {
-        title: 'policyId', dataIndex: 'policyId', key: 'policyId'
-    },
-    {
-        title: 'EXP Date', dataIndex: 'expiraionDate', key: 'expiraionDate'
-    }
-];
+import * as actions from '../actions/insuranceActionIndex';
 
 class InsuranceFile extends Component {
     componentDidUpdate(prevProps) {
@@ -31,24 +11,39 @@ class InsuranceFile extends Component {
         }
     }
 
+
     render() {
-        if (this.props.rxHistory.rx.rxList) {
-
-            let rxHistory = this.props.rxHistory.rx.rxList;
-
+        if (this.props.insurance.data) {
+            const insurance = this.props.insurance.data.insurance;
             return (
-                <Table columns={columns} rowKey={rxHistory.rxid} dataSource={rxHistory}/>
+                <div>
+                    <label>
+                        Insurance Provider:
+                    </label>
+                    <div>
+                        {insurance.insuranceName}
+                    </div>
+                    <label>
+                        Policy Number:
+                    </label>
+                    <div>
+                        {insurance.policyID}
+                    </div>
+                    <label>
+                        Expiration:
+                    </label>
+                    <div>
+                        {moment(insurance.expDate).format('MM/DD/YYYY')}
+                    </div>
+                </div>
             )
         }
-        return (
-            <div>No Data</div>
-        )
+        return null
     }
-
 }
 
-const mapStateToProps = ({onePatient}) => {
-    return {onePatient};
+const mapStateToProps = ({onePatient, insurance}) => {
+    return {onePatient, insurance};
 };
 
 

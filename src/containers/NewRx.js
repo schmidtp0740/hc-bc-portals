@@ -34,12 +34,12 @@ class NewRx extends Component {
             form.getFieldsValue();
 
             const patient = this.props.onePatient.data;
-            const rxID = this.props.rxHistory.rx.rxList.length;
+            const rxID = this.props.rxHistory.rx.rxList ? `rx${this.props.rxHistory.rx.rxList.length + 1}` : `rx${1}`;
 
             const newRx = {
                 "patientID": patient.patientID,
-                "rxid": "rx" + (rxID + 2),
-                "timestamp": Date.now(),
+                "rxid": rxID,
+                "timestamp": moment().valueOf(),
                 "doctor": "Dr. Sanchez",
                 "docLicense": "doc01",
                 "prescription": values.prescription,
@@ -49,7 +49,9 @@ class NewRx extends Component {
                 "expDate": moment(values.expDate).valueOf()
             };
 
-            this.props.submitRx(newRx);
+            console.log(newRx.timestamp);
+
+            // this.props.submitRx(newRx);
 
             form.resetFields();
             this.setState({visible: false});

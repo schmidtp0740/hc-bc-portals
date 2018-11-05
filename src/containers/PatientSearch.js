@@ -12,7 +12,7 @@ class DoctorSearch extends Component {
 
     handleChange = (value) => {
         this.props.fetchOnePatient(value);
-    };
+    }; 
 
 
     render() {

@@ -4,6 +4,7 @@ import PatientSearch from '../../containers/PatientSearch';
 import RxHistory from '../../containers/RxHistory';
 import PatientInfo from '../../containers/PatientInfo';
 import NewRx from '../../containers/NewRx';
+import InsuranceFile from "../../containers/insuranceFile";
 const { Sider, Content, Header } = Layout;
 const { Meta } = Card;
 
@@ -12,6 +13,7 @@ export default class Provider extends Component {
         super(props);
         this.state = {
             provider: {
+                type: '',
                 cover: '',
                 avatar: '',
                 title: '',
@@ -20,6 +22,24 @@ export default class Provider extends Component {
             patient: ''
         }
 
+    };
+
+    renderRxButton = () => {
+      if (this.props.provider.type === 'doctor') {
+          return (
+              <Menu.Item style={{float:'right', background:null}}>
+                  <NewRx />
+              </Menu.Item>
+          )
+      }
+    };
+
+    renderInsurance = () => {
+        if (this.props.provider.type === 'insurance') {
+            return (
+                <InsuranceFile />
+            )
+        }
     };
 
     render() {
@@ -41,13 +61,11 @@ export default class Provider extends Component {
                             <Menu.Item>
                                 <PatientSearch />
                             </Menu.Item>
-                            <Menu.Item style={{float:'right', background:null}}>
-                                <NewRx />
-                            </Menu.Item>
+                            {this.renderRxButton()}
                         </Menu>
                     </Header>
                     <Content>
-                        <RxHistory />
+                        <RxHistory provider={this.props.provider.type}/>
                     </Content>
                 </Layout>
             </Layout>
