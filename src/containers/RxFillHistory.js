@@ -3,6 +3,7 @@ import moment from 'moment';
 import {connect} from 'react-redux';
 import * as actions from '../actions/rxActionIndex';
 
+
 class RxFillHistory extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.onePatient.data.patientID !== prevProps.onePatient.data.patientID) {
@@ -10,10 +11,10 @@ class RxFillHistory extends Component {
         }
     }
 
-    render() {
-        if (this.props.rxHistory.rx.rxList) {
-            const rxHistory = this.props.rxHistory.rx.rxList;
+    renderTable = () => {
+        const {rxHistory} = this.props;
 
+        if (rxHistory.rx.rxList) {
             return (
                 <div className='ant-table-wrapper'>
                     <div className='ant-table ant-table-default ant-table-scroll-position-left'>
@@ -32,54 +33,33 @@ class RxFillHistory extends Component {
                                     </tr>
                                     </thead>
                                     <tbody className='ant-table-tbody'>
-                                    {rxHistory.map(rx => {
+                                        {rxHistory.rx.rxList.map(d => {
                                         return (
-                                            <tr className='ant-table-row ant-table-row-level-0' key={rx.rxid}>
+                                            <tr className='ant-table-row ant-table-row-level-0' key={d.rxid}>
                                                 <td>
-                                                        <span className='ant-table-row-indent'>
-                                                        {rx.doctor}
-                                                    </span>
+                                                    <span className='ant-table-row-indent indent-level-0'>{d.doctor}</span>
                                                 </td>
-
                                                 <td>
-                                                        <span className='ant-table-row-indent'>
-                                                        {rx.prescription}
-                                                        </span>
+                                                    <span className='ant-table-row-indent indent-level-0'>{d.prescription}</span>
                                                 </td>
-
                                                 <td>
-                                                        <span className='ant-table-row-indent'>
-                                                            {rx.expDate}
-                                                        </span>
+                                                    <span className='ant-table-row-indent indent-level-0'>{d.expDate}</span>
                                                 </td>
-
                                                 <td>
-                                                        <span className='ant-table-row-indent'>
-                                                            {rx.refills}
-                                                        </span>
+                                                    <span className='ant-table-row-indent indent-level-0'>{d.refills}</span>
                                                 </td>
-
                                                 <td>
-                                                        <span className='ant-table-row-indent'>
-                                                            {rx.quantity}
-                                                        </span>
+                                                    <span className='ant-table-row-indent indent-level-0'>{d.quantity}</span>
                                                 </td>
-
                                                 <td>
-                                                        <span className='ant-table-row-indent'>
-                                                            {rx.status}
-                                                        </span>
+                                                    <span className='ant-table-row-indent indent-level-0'>{d.status}</span>
                                                 </td>
-
                                                 <td>
-                                                        <span className='ant-table-row-indent'>
-                                                            {rx.timestamp}
-                                                        </span>
+                                                    <span className='ant-table-row-indent indent-level-0'>{d.timestamp}</span>
                                                 </td>
                                             </tr>
                                         )
-                                    })
-                                    }
+                                    }, this)}
                                     </tbody>
                                 </table>
                             </div>
@@ -88,13 +68,19 @@ class RxFillHistory extends Component {
                 </div>
             )
         }
-
         return (
             <div>No Data</div>
         )
-    }
+    };
 
+
+    render() {
+        return (
+            this.renderTable()
+        );
+    }
 }
+
 
 const mapStateToProps = ({onePatient, rxHistory}) => {
     return {onePatient, rxHistory};

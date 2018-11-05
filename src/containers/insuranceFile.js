@@ -1,26 +1,11 @@
 import React, {Component} from 'react';
 import {Table} from 'antd';
 import {connect} from 'react-redux';
-import * as actions from '../actions/rxActionIndex';
+import * as actions from '../actions/insuranceActionIndex';
 
 const columns = [
     {
         title: 'Name', dataIndex: 'name', key: 'name'
-    },
-    {
-        title: 'Phone', dataIndex: 'phone', key: 'phone'
-    },
-    {
-        title: 'SSN', dataIndex: 'ssn', key: 'ssn'
-    },
-    {
-        title: 'company', dataIndex: 'company', key: 'company'
-    },
-    {
-        title: 'policyId', dataIndex: 'policyId', key: 'policyId'
-    },
-    {
-        title: 'EXP Date', dataIndex: 'expiraionDate', key: 'expiraionDate'
     }
 ];
 
@@ -37,7 +22,7 @@ class InsuranceFile extends Component {
             let rxHistory = this.props.rxHistory.rx.rxList;
 
             return (
-                <Table columns={columns} rowKey={rxHistory.rxid} dataSource={rxHistory}/>
+                <Table columns={columns} rowKey={rxHistory.rxid} dataSource={insurance}/>
             )
         }
         return (
