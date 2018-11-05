@@ -34,6 +34,27 @@ class RxHistory extends Component {
 
 
     render() {
+        const columns = [
+            {
+                title: 'Prescriber', dataIndex: 'doctor', key: 'doctor'
+            },
+            {
+                title: 'Prescription', dataIndex: 'prescription', key: 'prescription'
+            },
+            {
+                title: 'Refills', dataIndex: 'refills', key: 'refills'
+            },
+            {
+                title: 'Qty', dataIndex: 'quantity', key: 'quantity'
+            },
+            {
+                title: 'Exp', dataIndex: 'expDate', key: 'exp'
+            },
+            {
+                title: 'Status', dataIndex: 'status', key: 'status'
+            }
+        ];
+
         if (this.props.rxHistory.rx.rxList) {
             const rxHistory = this.props.rxHistory.rx.rxList.map(data => {
 
@@ -53,34 +74,12 @@ class RxHistory extends Component {
                 return data
             });
 
-            const columns = [
-                {
-                    title: 'Prescriber', dataIndex: 'doctor', key: 'doctor'
-                },
-                {
-                    title: 'Prescription', dataIndex: 'prescription', key: 'prescription'
-                },
-                {
-                    title: 'Refills', dataIndex: 'refills', key: 'refills'
-                },
-                {
-                    title: 'Qty', dataIndex: 'quantity', key: 'quantity'
-                },
-                {
-                    title: 'Exp', dataIndex: 'expDate', key: 'exp'
-                },
-                {
-                    title: 'Status', dataIndex: 'status', key: 'status'
-                }
-            ];
-
-
             return (
                 <Table columns={columns} dataSource={rxHistory}/>
             )
         }
         return (
-            <div>No Data</div>
+            <Table columns={columns} />
         )
     }
 
