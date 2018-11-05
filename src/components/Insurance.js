@@ -45,7 +45,7 @@ class Insurance extends Component {
                         </Menu>
                     </Header>
                     <Content>
-                        <RxHistory />
+                        <RxHistory provider={insurance}/>
                     </Content>
                 </Layout>
             </Layout>

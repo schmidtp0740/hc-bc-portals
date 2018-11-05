@@ -23,6 +23,16 @@ export default class Provider extends Component {
 
     };
 
+    renderRxButton = () => {
+      if (this.props.provider.type === 'doctor') {
+          return (
+              <Menu.Item style={{float:'right', background:null}}>
+                  <NewRx />
+              </Menu.Item>
+          )
+      }
+    };
+
     render() {
         return (
             <Layout className="profile-layout" style={{width:'100%', margin: 'auto' }}>
@@ -42,9 +52,7 @@ export default class Provider extends Component {
                             <Menu.Item>
                                 <PatientSearch />
                             </Menu.Item>
-                            <Menu.Item style={{float:'right', background:null}}>
-                                <NewRx />
-                            </Menu.Item>
+                            {this.renderRxButton()}
                         </Menu>
                     </Header>
                     <Content>

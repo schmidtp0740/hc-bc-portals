@@ -27,7 +27,7 @@ class RxHistory extends Component {
                 "phLicense": "pha01",
                 "prescription": data.prescription,
                 "refills": data.refills,
-                "status": "filled",
+                "status": 'filled',
                 "expDate": new Date(data.expDate).getTime() / 1000,
             });
     };
@@ -36,14 +36,18 @@ class RxHistory extends Component {
     render() {
         if (this.props.rxHistory.rx.rxList) {
             const rxHistory = this.props.rxHistory.rx.rxList.map(data => {
+
                 const checkStatus = () => {
-                    if (this.props.provider.type === 'pharmacist') {
+                    if (this.props.provider === 'pharmacist') {
                         if (data.status !== 'filled') {
-                            return (data.status = <button onClick={() => { this.handleClick(data)} }>Fill Rx</button>)
+                            return (
+                                data.status = <button onClick={() => {this.handleClick(data)}}>Fill Rx</button>)
                         }
+                        return (data.status = 'filled')
                     }
                     return (data.status = 'prescribed')
                 };
+
                 data.expDate = moment(data.expDate).format('MM/DD/YYYY');
                 data.status = checkStatus();
                 return data

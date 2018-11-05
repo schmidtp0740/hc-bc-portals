@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { Card, Layout, Avatar, Menu } from 'antd';
-import PatientSearch from '../containers/PatientSearch';
-import RxHistory from '../containers/RxHistory';
-import PatientInfo from '../containers/PatientInfo';
-const { Sider, Content, Header } = Layout;
-const { Meta } = Card;
+import { Avatar } from 'antd';
+import Provider from "./Misc/Providers";
 
 const pharmacist = {
     type: 'pharmacist',
@@ -17,30 +13,7 @@ const pharmacist = {
 export default class Pharmacist extends Component {
     render() {
         return (
-            <Layout className="profile-layout" style={{width:'100%', margin: 'auto' }}>
-                <Sider width={300}>
-                    <Card style={{ width: 300 }} cover={pharmacist.cover}>
-                        <Meta avatar={pharmacist.avatar} title={pharmacist.title} description={pharmacist.description} />
-                    </Card>
-                    <PatientInfo />
-                </Sider>
-                <Layout>
-                    <Header>
-                        <Menu
-                            theme="dark"
-                            mode="horizontal"
-                            style={{ lineHeight: '64px' }}
-                        >
-                            <Menu.Item>
-                                <PatientSearch />
-                            </Menu.Item>
-                        </Menu>
-                    </Header>
-                    <Content>
-                        <RxHistory provider={pharmacist}/>
-                    </Content>
-                </Layout>
-            </Layout>
+            <Provider provider={pharmacist}/>
         );
     }
 }
