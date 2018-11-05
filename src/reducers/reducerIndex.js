@@ -3,6 +3,7 @@ import allPatients from './allPatientsReducer';
 import onePatient from './onePatientReducer';
 import rxHistory from './rxReducer';
 import submitRx from './submitRxReducer';
+import fillRx from './fillRxReducer';
 import insurance from './insuranceReducer';
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
     allPatients,
     rxHistory,
     submitRx,
+    fillRx,
     insurance
 });

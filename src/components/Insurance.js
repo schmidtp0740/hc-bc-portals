@@ -16,8 +16,11 @@ const insurance = {
 };
 
 class Insurance extends Component {
-    componentDidMount() {
-        this.props.fetchInsurance();
+    componentDidUpdate(prevProps) {
+        if (this.props.onePatient.data.patientID !== prevProps.onePatient.data.patientID) {
+            let patientID = this.props.onePatient.data.patientID;
+            this.props.fetchInsurance(patientID);
+        }
     }
 
     render() {
@@ -42,7 +45,7 @@ class Insurance extends Component {
                         </Menu>
                     </Header>
                     <Content>
-                        <RxHistory/>
+                        <RxHistory />
                     </Content>
                 </Layout>
             </Layout>
@@ -50,8 +53,8 @@ class Insurance extends Component {
     }
 }
 
-const mapStateToProps = ({insurance}) => {
-    return {insurance};
+const mapStateToProps = ({ onePatient }) => {
+    return { onePatient };
 };
 
 export default connect(mapStateToProps, actions)(Insurance);

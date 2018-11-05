@@ -22,7 +22,7 @@ class RxFillHistory extends Component {
                             <div className='ant-table-body'>
                                 <table className='ant-table table'>
                                     <thead className='ant-table-thead'>
-                                    <tr>
+                                        <tr>
                                         <th>Prescriber</th>
                                         <th>Prescription</th>
                                         <th>Exp</th>
@@ -34,32 +34,46 @@ class RxFillHistory extends Component {
                                     </thead>
                                     <tbody className='ant-table-tbody'>
                                         {rxHistory.rx.rxList.map(d => {
-                                        return (
-                                            <tr className='ant-table-row ant-table-row-level-0' key={d.rxid}>
-                                                <td>
-                                                    <span className='ant-table-row-indent indent-level-0'>{d.doctor}</span>
-                                                </td>
-                                                <td>
-                                                    <span className='ant-table-row-indent indent-level-0'>{d.prescription}</span>
-                                                </td>
-                                                <td>
-                                                    <span className='ant-table-row-indent indent-level-0'>{d.expDate}</span>
-                                                </td>
-                                                <td>
-                                                    <span className='ant-table-row-indent indent-level-0'>{d.refills}</span>
-                                                </td>
-                                                <td>
-                                                    <span className='ant-table-row-indent indent-level-0'>{d.quantity}</span>
-                                                </td>
-                                                <td>
-                                                    <span className='ant-table-row-indent indent-level-0'>{d.status}</span>
-                                                </td>
-                                                <td>
-                                                    <span className='ant-table-row-indent indent-level-0'>{d.timestamp}</span>
-                                                </td>
-                                            </tr>
-                                        )
-                                    }, this)}
+                                            return (
+                                                <tr className='ant-table-row ant-table-row-level-0' key={d.rxid}>
+                                                    <td>
+                                                    <span className='ant-table-row-indent'>
+                                                        {d.doctor}
+                                                    </span>
+                                                    </td>
+                                                    <td>
+                                                    <span className='ant-table-row-indent'>
+                                                        {d.prescription}
+                                                    </span>
+                                                    </td>
+                                                    <td>
+                                                    <span className='ant-table-row-indent'>
+                                                        {moment(d.expDate).format("MM/DD/YYYY")}
+                                                    </span>
+                                                    </td>
+                                                    <td>
+                                                    <span className='ant-table-row-indent'>
+                                                        {d.refills}
+                                                    </span>
+                                                    </td>
+                                                    <td>
+                                                    <span className='ant-table-row-indent'>
+                                                        {d.quantity}
+                                                    </span>
+                                                    </td>
+                                                    <td>
+                                                    <span className='ant-table-row-indent'>
+                                                        {d.status}
+                                                    </span>
+                                                    </td>
+                                                    <td>
+                                                    <span className='ant-table-row-indent'>
+                                                        {moment(d.timestamp).format("MM/DD/YYYY")}
+                                                    </span>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </div>

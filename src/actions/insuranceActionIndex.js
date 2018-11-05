@@ -7,7 +7,7 @@ export const fetchInsurance = (id) => async dispatch => {
     try {
         const res = await axios.get(`${url}/${id}`);
         dispatch({
-            type: 'FETCH_INSURANCE',
+            type: FETCH_INSURANCE,
             payload: res.data
         })
     } catch (e) {

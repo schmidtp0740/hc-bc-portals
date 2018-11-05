@@ -3,11 +3,11 @@ import { Card, Layout, Avatar, Menu } from 'antd';
 import PatientSearch from '../containers/PatientSearch';
 import RxHistory from '../containers/RxHistory';
 import PatientInfo from '../containers/PatientInfo';
-import RxFillHistory from "../containers/RxFillHistory";
 const { Sider, Content, Header } = Layout;
 const { Meta } = Card;
 
 const pharmacist = {
+    type: 'pharmacist',
     cover: <img alt='example' src='https://i.pinimg.com/originals/17/9c/8d/179c8db70dda14e89103738b06b9d683.jpg' />,
     avatar: <Avatar shape='square' size='large' src='https://thedrugofthenation.files.wordpress.com/2013/10/walterwhite1.jpg' />,
     title: 'Dr. Walter White PharmD',
@@ -37,7 +37,7 @@ export default class Pharmacist extends Component {
                         </Menu>
                     </Header>
                     <Content>
-                        <RxFillHistory />
+                        <RxHistory provider={pharmacist}/>
                     </Content>
                 </Layout>
             </Layout>

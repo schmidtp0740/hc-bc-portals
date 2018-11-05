@@ -1,5 +1,5 @@
 import {
-    FETCH_INSURANCE
+    FILL_RX
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -8,10 +8,10 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case FETCH_INSURANCE:
-            console.log(action.payload);
+        case FILL_RX:
             return {...state, data: action.payload};
         default:
             return {...state};
     }
 };
+

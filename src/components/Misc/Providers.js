@@ -12,6 +12,7 @@ export default class Provider extends Component {
         super(props);
         this.state = {
             provider: {
+                type: '',
                 cover: '',
                 avatar: '',
                 title: '',
@@ -47,7 +48,7 @@ export default class Provider extends Component {
                         </Menu>
                     </Header>
                     <Content>
-                        <RxHistory />
+                        <RxHistory provider={this.props.provider.type}/>
                     </Content>
                 </Layout>
             </Layout>
