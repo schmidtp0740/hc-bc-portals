@@ -6,7 +6,8 @@ import {
     // BILL_RX
 } from './types';
 
-const url = "http://129.213.66.90:8080/rx";
+// const url = "http://129.213.66.90:8080/rx";
+const url = "http://"+window.location.hostname+":8080/rx";
 
 export const fetchRxHistory = (id) => async dispatch => {
     try {
