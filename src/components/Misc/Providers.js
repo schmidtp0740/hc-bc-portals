@@ -4,6 +4,7 @@ import PatientSearch from '../../containers/PatientSearch';
 import RxHistory from '../../containers/RxHistory';
 import PatientInfo from '../../containers/PatientInfo';
 import NewRx from '../../containers/NewRx';
+import InsuranceFile from "../../containers/insuranceFile";
 const { Sider, Content, Header } = Layout;
 const { Meta } = Card;
 
@@ -31,6 +32,14 @@ export default class Provider extends Component {
               </Menu.Item>
           )
       }
+    };
+
+    renderInsurance = () => {
+        if (this.props.provider.type === 'insurance') {
+            return (
+                <InsuranceFile />
+            )
+        }
     };
 
     render() {

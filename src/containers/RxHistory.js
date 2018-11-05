@@ -17,19 +17,30 @@ class RxHistory extends Component {
         }
     }
 
-    handleClick = (data) => {
+    handleFill = (data) => {
         this.props.fillRx(
             {
                 "patientID": this.props.onePatient.data.patientID,
-                "rxid": "rx01",
+                "rxid": data.rxid,
                 "timestamp": data.timestamp,
                 "pharmacist": "pha",
                 "phLicense": "pha01",
                 "prescription": data.prescription,
                 "refills": data.refills,
                 "status": 'filled',
-                "expDate": new Date(data.expDate).getTime() / 1000,
+                "expDate": data.expDate
             });
+    };
+
+    handleApprove = (data) => {
+        this.props.approveRx(
+            {
+                "patientID": this.props.onePatient.data.patientID,
+                "rxid": data.rxid,
+                "timestamp": data.timestamp,
+                "approved": "true"
+            }
+        )
     };
 
 
@@ -56,17 +67,27 @@ class RxHistory extends Component {
         ];
 
         if (this.props.rxHistory.rx.rxList) {
+
             const rxHistory = this.props.rxHistory.rx.rxList.map(data => {
 
                 const checkStatus = () => {
                     if (this.props.provider === 'pharmacist') {
                         if (data.status !== 'filled') {
                             return (
-                                data.status = <button onClick={() => {this.handleClick(data)}}>Fill Rx</button>)
+                                data.status = <button onClick={() => {this.handleFill(data)}}>Fill Rx</button>)
                         }
                         return (data.status = 'filled')
                     }
-                    return (data.status = 'prescribed')
+                    if (this.props.provider === 'insurance') {
+                        if (data.status === 'filled') {
+                            if (data.approved === 'false') {
+                                return (
+                                    data.status = <button onClick={() => {this.handleApprove(data)}}>Approve Rx</button>)
+                            }
+                            return ('Approved')
+                        }
+                    }
+                    return (data.status)
                 };
 
                 data.expDate = moment(data.expDate).format('MM/DD/YYYY');

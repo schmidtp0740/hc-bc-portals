@@ -39,7 +39,7 @@ class NewRx extends Component {
             const newRx = {
                 "patientID": patient.patientID,
                 "rxid": rxID,
-                "timestamp": Date.now(),
+                "timestamp": moment().valueOf(),
                 "doctor": "Dr. Sanchez",
                 "docLicense": "doc01",
                 "prescription": values.prescription,
@@ -49,7 +49,9 @@ class NewRx extends Component {
                 "expDate": moment(values.expDate).valueOf()
             };
 
-            this.props.submitRx(newRx);
+            console.log(newRx.timestamp);
+
+            // this.props.submitRx(newRx);
 
             form.resetFields();
             this.setState({visible: false});
