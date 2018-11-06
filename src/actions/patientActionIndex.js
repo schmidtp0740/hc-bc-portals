@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {FETCH_ONE_PATIENT, FETCH_PATIENTS} from './types';
 
-// const url = "http://129.213.66.90:8080/pd";
+const url = "http://129.213.11.204:8080/pd";
 
-const url = 'http://'+window.location.hostname+':8080/insurance';
+// var url = "http://"+window.location.hostname+":8080/insurance";
 
 export const fetchPatients = () => async dispatch => {
     try {

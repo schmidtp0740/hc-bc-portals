@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import {
     FETCH_RX_HISTORY,
     SUBMIT_RX,
@@ -6,8 +7,8 @@ import {
     APPROVE_RX
 } from './types';
 
-// const url = "http://129.213.66.90:8080/rx";
-const url = "http://"+window.location.hostname+":8080/rx";
+const url = "http://129.213.11.204:8080/rx";
+// var url = "http://"+window.location.hostname+":8080/rx";
 
 export const fetchRxHistory = (id) => async dispatch => {
     try {
@@ -36,6 +37,8 @@ export const submitRx = (data) => async (dispatch) => {
 
 export const fillRx = (data) => async (dispatch) => {
     try {
+        data.expDate = moment(data.expDate).valueOf()
+        data.timestamp = moment().valueOf()
         const res = await axios.patch(url, data);
 
         dispatch({
