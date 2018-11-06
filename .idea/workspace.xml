@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a81cfa49-04da-4558-b1d2-af8cdc69ee7f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/rxActionIndex.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/rxActionIndex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Misc/Nav.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Misc/Nav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Misc/Providers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Misc/Providers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/NewRx.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/NewRx.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/RxHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/RxHistory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/insuranceFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/insuranceFile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/iotinfo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/rxReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/rxReducer.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -39,28 +32,28 @@
         <counts>
           <entry key="css" value="14" />
           <entry key="gitignore" value="1" />
-          <entry key="js" value="252" />
+          <entry key="js" value="253" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="14" />
           <entry key="Git file" value="1" />
-          <entry key="JavaScript" value="252" />
+          <entry key="JavaScript" value="253" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="379" />
           <entry key="gitignore" value="14" />
-          <entry key="js" value="27214" />
+          <entry key="js" value="27251" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="379" />
           <entry key="Git file" value="14" />
-          <entry key="JavaScript" value="27214" />
+          <entry key="JavaScript" value="27251" />
         </counts>
       </usages-collector>
     </session>
@@ -168,18 +161,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reducers/allPatientsReducer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="12" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#53#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reducers/fillRxReducer.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
@@ -191,13 +172,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/NewRx.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="56" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
+            <state relative-caret-position="745">
+              <caret line="50" column="52" lean-forward="true" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/containers/RxHistory.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="215">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -264,12 +257,12 @@
         <option value="$PROJECT_DIR$/src/components/Pharmacist.js" />
         <option value="$PROJECT_DIR$/src/containers/insuranceFile.js" />
         <option value="$PROJECT_DIR$/src/actions/rxActionIndex.js" />
-        <option value="$PROJECT_DIR$/src/containers/RxHistory.js" />
         <option value="$PROJECT_DIR$/src/reducers/rxReducer.js" />
         <option value="$PROJECT_DIR$/src/components/Misc/Providers.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/components/Misc/Nav.js" />
         <option value="$PROJECT_DIR$/src/containers/NewRx.js" />
+        <option value="$PROJECT_DIR$/src/containers/RxHistory.js" />
       </list>
     </option>
   </component>
@@ -401,7 +394,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="121706000" />
+    <option name="totallyTimeSpent" value="121950000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="23" width="1382" height="797" extended-state="0" />
@@ -647,16 +640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/RxHistory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="37" lean-forward="true" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/allPatientsReducer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -743,10 +726,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/NewRx.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="56" selection-start-line="15" selection-start-column="56" selection-end-line="15" selection-end-column="56" />
+        <state relative-caret-position="745">
+          <caret line="50" column="52" lean-forward="true" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/RxHistory.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -9,6 +9,14 @@ class RxHistory extends Component {
         if (this.props.onePatient.data.patientID !== prevProps.onePatient.data.patientID) {
             this.props.fetchRxHistory(this.props.onePatient.data.patientID);
         }
+
+        if (this.props.rxHistory !== prevProps.rxHistory) {
+            this.props.fetchRxHistory(this.props.onePatient.data.patientID);
+        }
+
+        if (this.props.fillRx !== prevProps.fillRx) {
+            this.props.fetchRxHistory(this.props.onePatient.data.patientID);
+        }
     }
 
     handleFill = (data) => {
