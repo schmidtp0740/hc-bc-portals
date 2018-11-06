@@ -6,8 +6,14 @@ import * as actions from "../actions/rxActionIndex";
 import moment from "moment";
 
 class NewRx extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            provider: ''
+        }
+    }
     componentDidUpdate(prevProps) {
-        if (this.props.rxHistory.rx.length !== prevProps.rxHistory.rx.length) {
+        if (this.props.rxHistory !== prevProps.rxHistory) {
             this.props.fetchRxHistory(this.props.onePatient.data.patientID);
         }
     }
@@ -40,7 +46,7 @@ class NewRx extends Component {
                 "patientID": patient.patientID,
                 "rxid": rxID,
                 "timestamp": moment().valueOf(),
-                "doctor": "Dr. Sanchez",
+                "doctor": this.props.provider,
                 "docLicense": "doc01",
                 "prescription": values.prescription,
                 "refills": parseInt(values.refills),
@@ -48,8 +54,6 @@ class NewRx extends Component {
                 "status": "prescribed",
                 "expDate": moment(values.expDate).valueOf()
             };
-
-            console.log(newRx);
 
             this.props.submitRx(newRx);
 

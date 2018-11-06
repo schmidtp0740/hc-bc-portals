@@ -1,16 +1,10 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 import {Table} from 'antd';
-import {connect} from 'react-redux';
+import {connect} from "react-redux";
 import * as actions from '../actions/rxActionIndex';
 
 class RxHistory extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            provider: {}
-        }
-    }
     componentDidUpdate(prevProps) {
         if (this.props.onePatient.data.patientID !== prevProps.onePatient.data.patientID) {
             this.props.fetchRxHistory(this.props.onePatient.data.patientID);
@@ -22,13 +16,13 @@ class RxHistory extends Component {
             {
                 "patientID": this.props.onePatient.data.patientID,
                 "rxid": data.rxid,
-                "timestamp": data.timestamp,
+                "timestamp": moment(data.timestamp).valueOf(),
                 "pharmacist": "pha",
                 "phLicense": "pha01",
                 "prescription": data.prescription,
                 "refills": data.refills,
                 "status": 'filled',
-                "expDate": data.expDate
+                "expDate": moment(data.expDate).valueOf()
             });
     };
 
@@ -37,7 +31,7 @@ class RxHistory extends Component {
             {
                 "patientID": this.props.onePatient.data.patientID,
                 "rxid": data.rxid,
-                "timestamp": data.timestamp,
+                "timestamp": moment(data.timestamp).valueOf(),
                 "approved": "true"
             }
         )
@@ -106,9 +100,8 @@ class RxHistory extends Component {
 
 }
 
-const mapStateToProps = ({onePatient, rxHistory}) => {
-    return {onePatient, rxHistory};
+const mapStateToProps = (state) => {
+    return {...state}
 };
-
 
 export default connect(mapStateToProps, actions)(RxHistory);

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 
 export default class Nav extends Component {
@@ -13,16 +12,16 @@ export default class Nav extends Component {
                         style={{lineHeight: '64px', paddingLeft: '16px'}}
                     >
                         <Menu.Item key="1">
-                            <Link to='/'>Home</Link>
+                            <a href='/'>Home</a>
                         </Menu.Item>
                         <Menu.Item key="2">
-                            <Link to='/doctor'>Doctor</Link>
+                            <a href='/doctor'>Doctor</a>
                         </Menu.Item>
                         <Menu.Item key="3">
-                            <Link to='/pharmacist'>Pharmacist</Link>
+                            <a href='/pharmacist'>Pharmacist</a>
                         </Menu.Item>
                         <Menu.Item key="4">
-                            <Link to='/insurance'>Insurance</Link>
+                            <a href='/insurance'>Insurance</a>
                         </Menu.Item>
                     </Menu>
                 </Layout>

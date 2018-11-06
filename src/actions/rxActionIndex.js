@@ -37,8 +37,8 @@ export const submitRx = (data) => async (dispatch) => {
 
 export const fillRx = (data) => async (dispatch) => {
     try {
-        data.expDate = moment(data.expDate).valueOf()
-        data.timestamp = moment().valueOf()
+        // data.expDate = moment(data.expDate).valueOf()
+        // data.timestamp = moment().valueOf()
         const res = await axios.patch(url, data);
 
         dispatch({

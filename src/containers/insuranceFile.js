@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import moment from 'moment';
-import {Table} from 'antd';
 import {connect} from 'react-redux';
 import * as actions from '../actions/insuranceActionIndex';
 
