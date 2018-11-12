@@ -8,33 +8,18 @@ const { Sider, Content, Header } = Layout;
 const { Meta } = Card;
 
 export default class Provider extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            provider: {
-                type: '',
-                cover: '',
-                avatar: '',
-                title: '',
-                description: ''
-            },
-            patient: ''
+    renderRxButton() {
+        if (this.props.provider.type === 'doctor') {
+            return (
+                <Menu.Item style={{float: 'right', background: null}}>
+                    <NewRx provider={this.props.provider}/>
+                </Menu.Item>
+            )
         }
+    }
 
-    };
-
-    renderRxButton = () => {
-      if (this.props.provider.type === 'doctor') {
-          return (
-              <Menu.Item style={{float:'right', background:null}}>
-                  <NewRx provider={this.props.provider.title}/>
-              </Menu.Item>
-          )
-      }
-    };
-
-    render() {
-        return (
+    renderProvider() {
+        return(
             <Layout className="profile-layout" style={{width:'100%', margin: 'auto' }}>
                 <Sider width={300}>
                     <Card style={{ width: 300 }} cover={this.props.provider.cover}>
@@ -56,10 +41,16 @@ export default class Provider extends Component {
                         </Menu>
                     </Header>
                     <Content>
-                        <RxHistory provider={this.props.provider.type}/>
+                        <RxHistory provider={this.props.provider} />
                     </Content>
                 </Layout>
             </Layout>
+        )
+    };
+
+    render() {
+        return (
+            this.renderProvider()
         );
     }
 }

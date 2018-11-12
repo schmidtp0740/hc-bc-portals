@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Layout, Menu } from 'antd';
 
 export default class Nav extends Component {

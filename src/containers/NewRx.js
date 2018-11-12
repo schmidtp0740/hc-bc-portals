@@ -2,7 +2,7 @@ import {Button} from 'antd';
 import React, {Component} from 'react';
 import {RxForm} from './Form';
 import {connect} from 'react-redux';
-import * as actions from "../actions/rxActionIndex";
+import * as rxActions from "../actions/rxActions";
 import moment from "moment";
 
 class NewRx extends Component {
@@ -10,11 +10,6 @@ class NewRx extends Component {
         super(props);
         this.state = {
             provider: ''
-        }
-    }
-    componentDidUpdate(prevProps) {
-        if (this.props.rxHistory !== prevProps.rxHistory) {
-            this.props.fetchRxHistory(this.props.onePatient.data.patientID);
         }
     }
     state = {
@@ -46,7 +41,7 @@ class NewRx extends Component {
                 "patientID": patient.patientID,
                 "rxid": rxID,
                 "timestamp": moment().valueOf(),
-                "doctor": this.props.provider,
+                "doctor": this.props.provider.title,
                 "docLicense": "doc01",
                 "prescription": values.prescription,
                 "refills": parseInt(values.refills),
@@ -54,8 +49,9 @@ class NewRx extends Component {
                 "status": "prescribed",
                 "expDate": moment(values.expDate).valueOf()
             };
-
+            console.log(newRx.prescription + " new Rx");
             this.props.submitRx(newRx);
+            this.props.fetchRxHistory(this.props.onePatient.data.patientID);
 
             form.resetFields();
             this.setState({visible: false});
@@ -97,4 +93,4 @@ const mapStateToProps = ({submitRx, onePatient, rxHistory}) => {
     return {submitRx, onePatient, rxHistory}
 };
 
-export default connect(mapStateToProps, actions)(NewRx);
+export default connect(mapStateToProps, rxActions)(NewRx);

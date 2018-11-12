@@ -1,17 +1,10 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
-import * as actions from '../actions/insuranceActionIndex';
+import * as actions from '../actions/fetchPatientActions';
 
 class InsuranceFile extends Component {
-    componentDidUpdate(prevProps) {
-        if (this.props.onePatient.data.patientID !== prevProps.onePatient.data.patientID) {
-            this.props.fetchInsurance(this.props.onePatient.data.patientID);
-        }
-    }
-
-
-    render() {
+    renderInsurance() {
         if (this.props.insurance.data) {
             const insurance = this.props.insurance.data.insurance;
             return (
@@ -39,6 +32,14 @@ class InsuranceFile extends Component {
         }
         return null
     }
+
+    render() {
+        return(
+            this.renderInsurance()
+        )
+
+    }
+
 }
 
 const mapStateToProps = ({onePatient, insurance}) => {

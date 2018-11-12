@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Select } from 'antd';
 import { connect } from 'react-redux';
-import * as actions from '../actions/patientActionIndex';
+import * as actions from '../actions/fetchPatientActions';
 
 const Option = Select.Option;
 
-class DoctorSearch extends Component {
+class PatientSearch extends Component {
     componentDidMount() {
         this.props.fetchPatients();
     }
@@ -36,4 +36,4 @@ const mapStateToProps = ({allPatients, onePatient}) => {
 };
 
 
-export default connect(mapStateToProps, actions)(DoctorSearch);
+export default connect(mapStateToProps, actions)(PatientSearch);

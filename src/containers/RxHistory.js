@@ -2,24 +2,31 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import {Table} from 'antd';
 import {connect} from "react-redux";
-import * as actions from '../actions/rxActionIndex';
+import * as rxActions from '../actions/rxActions';
+
+const columns = [
+    {
+        title: 'Prescriber', dataIndex: 'doctor', key: 'doctor'
+    },
+    {
+        title: 'Prescription', dataIndex: 'prescription', key: 'prescription'
+    },
+    {
+        title: 'Refills', dataIndex: 'refills', key: 'refills'
+    },
+    {
+        title: 'Qty', dataIndex: 'quantity', key: 'quantity'
+    },
+    {
+        title: 'Exp', dataIndex: 'expDate', key: 'exp'
+    },
+    {
+        title: 'Status', dataIndex: 'status', key: 'status'
+    }
+];
 
 class RxHistory extends Component {
-    componentDidUpdate(prevProps) {
-        if (this.props.onePatient.data.patientID !== prevProps.onePatient.data.patientID) {
-            this.props.fetchRxHistory(this.props.onePatient.data.patientID);
-        }
-
-        if (this.props.rxHistory !== prevProps.rxHistory) {
-            this.props.fetchRxHistory(this.props.onePatient.data.patientID);
-        }
-
-        if (this.props.fillRx !== prevProps.fillRx) {
-            this.props.fetchRxHistory(this.props.onePatient.data.patientID);
-        }
-    }
-
-    handleFill = (data) => {
+    handleFill(data) {
         this.props.fillRx(
             {
                 "patientID": this.props.onePatient.data.patientID,
@@ -32,9 +39,10 @@ class RxHistory extends Component {
                 "status": 'filled',
                 "expDate": moment(data.expDate).valueOf()
             });
+        this.props.fetchRxHistory(this.props.onePatient.data.patientID);
     };
 
-    handleApprove = (data) => {
+    handleApprove(data) {
         this.props.approveRx(
             {
                 "patientID": this.props.onePatient.data.patientID,
@@ -42,49 +50,36 @@ class RxHistory extends Component {
                 "timestamp": moment(data.timestamp).valueOf(),
                 "approved": "true"
             }
-        )
+        );
+        this.props.fetchRxHistory(this.props.onePatient.data.patientID);
     };
 
-
-    render() {
-        const columns = [
-            {
-                title: 'Prescriber', dataIndex: 'doctor', key: 'doctor'
-            },
-            {
-                title: 'Prescription', dataIndex: 'prescription', key: 'prescription'
-            },
-            {
-                title: 'Refills', dataIndex: 'refills', key: 'refills'
-            },
-            {
-                title: 'Qty', dataIndex: 'quantity', key: 'quantity'
-            },
-            {
-                title: 'Exp', dataIndex: 'expDate', key: 'exp'
-            },
-            {
-                title: 'Status', dataIndex: 'status', key: 'status'
-            }
-        ];
-
+    renderTable() {
         if (this.props.rxHistory.rx.rxList) {
-
             const rxHistory = this.props.rxHistory.rx.rxList.map(data => {
-
                 const checkStatus = () => {
-                    if (this.props.provider === 'pharmacist') {
+                    if (this.props.provider.type === 'pharmacist') {
                         if (data.status !== 'filled') {
                             return (
-                                data.status = <button onClick={() => {this.handleFill(data)}}>Fill Rx</button>)
+                                data.status = <button
+                                                type='button'
+                                                onClick={() => {this.handleFill(data)}}>
+                                                    Fill Rx
+                                              </button>
+                            )
                         }
                         return (data.status = 'filled')
                     }
-                    if (this.props.provider === 'insurance') {
+                    if (this.props.provider.type === 'insurance') {
                         if (data.status === 'filled') {
                             if (data.approved === 'false') {
                                 return (
-                                    data.status = <button onClick={() => {this.handleApprove(data)}}>Approve Rx</button>)
+                                    data.status = <button
+                                                    type='button'
+                                                    onClick={() => {this.handleApprove(data)}}>
+                                                        Approve Rx
+                                                  </button>
+                                )
                             }
                             return ('Approved')
                         }
@@ -94,22 +89,30 @@ class RxHistory extends Component {
 
                 data.expDate = moment(data.expDate).format('MM/DD/YYYY');
                 data.status = checkStatus();
-                return data
+                return data;
             });
 
             return (
                 <Table columns={columns} dataSource={rxHistory}/>
-            )
+            );
         }
-        return (
+
+        return(
             <Table columns={columns} />
+        )
+    }
+
+
+    render() {
+        return (
+            this.renderTable()
         )
     }
 
 }
 
-const mapStateToProps = (state) => {
-    return {...state}
+const mapStateToProps = ({onePatient, rxHistory, submitRx, approveRx}) => {
+    return {onePatient, rxHistory, submitRx, approveRx}
 };
 
-export default connect(mapStateToProps, actions)(RxHistory);
+export default connect(mapStateToProps, rxActions)(RxHistory);
