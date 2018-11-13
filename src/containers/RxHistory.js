@@ -69,7 +69,7 @@ class RxHistory extends Component {
                     </button>
                 )
             }
-            return (data.status = 'Filled')
+            return (data.status = 'filled')
         }
         if (this.props.provider.type === 'insurance') {
             if (data.status === 'filled') {
@@ -82,13 +82,15 @@ class RxHistory extends Component {
                         </button>
                     )
                 }
-                return (data.status = 'Approved')
             }
         }
         return data.status
     };
 
     renderTable() {
+        switch (this.props.rxHistory) {
+
+        }
         if (this.props.rxHistory.isFetching) {
             return (
                 <div className='ant-table-placeholder'>Loading...</div>
@@ -102,19 +104,22 @@ class RxHistory extends Component {
                     data.status = this.checkStatus(data);
                     return data
                 });
+            if (this.props.provider.type !== 'doctor') {
+                const reducedHistory = rxHistory.reduce((acc, data) => {
+                    if (data.status !== 'filled' && data.approved !== 'true') {
+                        acc.push(data);
+                    }
+                    console.log(acc);
+                    return acc;
+                }, []);
 
-            const reducedHistory = rxHistory.reduce((acc, data) => {
-                if (data.status !== 'filled' && data.approved !== 'true') {
-                    acc.push(data);
-
-                }
-                console.log(acc);
-                return acc;
-            }, []);
-
+                return (
+                    <Table columns={columns} dataSource={reducedHistory} rowKey={reducedHistory => reducedHistory.rxid}/>
+                );
+            }
 
             return (
-                <Table columns={columns} dataSource={reducedHistory} rowKey={reducedHistory => reducedHistory.rxid}/>
+                <Table columns={columns} dataSource={rxHistory} rowKey={rxHistory => rxHistory.rxid}/>
             );
         }
 
