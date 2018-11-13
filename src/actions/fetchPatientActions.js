@@ -1,5 +1,5 @@
 import axios from "axios";
-import {FETCH_ONE_PATIENT, FETCH_PATIENTS} from "./types";
+import {FETCH_ONE_PATIENT, FETCH_ONE_PATIENT_ERROR, FETCH_PATIENTS, FETCH_PATIENTS_ERROR} from "./types";
 import {pdUrl} from "./fetchUrls";
 
 export const fetchPatients = () => async dispatch => {
@@ -10,7 +10,10 @@ export const fetchPatients = () => async dispatch => {
             payload: res.data
         });
     } catch (e) {
-        console.error(e);
+        dispatch({
+            type: FETCH_PATIENTS_ERROR,
+            payload: "An error has occurred " + e
+        })
     }
 };
 
@@ -23,7 +26,10 @@ export const fetchOnePatient = (id) => async dispatch => {
             payload: res.data
         })
     } catch (e) {
-        console.error(e);
+        dispatch({
+            type: FETCH_ONE_PATIENT_ERROR,
+            payload: "An error has occurred " + e
+        })
 
     }
 };

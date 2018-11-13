@@ -31,7 +31,7 @@ import InsuranceFile from "./insuranceFile";
              )
          }
          return (
-             <p>Select A Patient Above</p>
+             <div className='patient-info'>No Patient Selected</div>
          )
      };
 

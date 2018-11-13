@@ -1,5 +1,5 @@
 import axios from "axios";
-import {FETCH_RX_HISTORY, FETCH_HISTORY_ERROR, FILL_RX, SUBMIT_RX, APPROVE_RX} from "./types";
+import {FETCH_RX_HISTORY, FETCH_HISTORY_ERROR, FILL_RX, SUBMIT_RX, APPROVE_RX, FILL_RX_ERROR} from "./types";
 import {rxUrl} from "./fetchUrls";
 
 export const submitRx = (data) => async dispatch => {
@@ -40,7 +40,10 @@ export const fillRx = data => async dispatch => {
             payload: res.data
         })
     } catch(e) {
-        console.error(e);
+        dispatch({
+            type: FILL_RX_ERROR,
+            payload: "Could Not Fill Rx."
+        });
     }
 };
 

@@ -6,22 +6,25 @@ import * as rxActions from '../actions/rxActions';
 
 const columns = [
     {
-        title: 'Prescriber', dataIndex: 'doctor', key: 'doctor'
+        title: 'Prescriber', dataIndex: 'doctor', rowKey: 'doctor'
     },
     {
-        title: 'Prescription', dataIndex: 'prescription', key: 'prescription'
+        title: 'Submitted', dataIndex: 'timestamp', rowKey: 'timestamp'
     },
     {
-        title: 'Refills', dataIndex: 'refills', key: 'refills'
+        title: 'Prescription', dataIndex: 'prescription', rowKey: 'prescription'
     },
     {
-        title: 'Qty', dataIndex: 'quantity', key: 'quantity'
+        title: 'Refills', dataIndex: 'refills', rowKey: 'refills'
     },
     {
-        title: 'Exp', dataIndex: 'expDate', key: 'exp'
+        title: 'Qty', dataIndex: 'quantity', rowKey: 'quantity'
     },
     {
-        title: 'Status', dataIndex: 'status', key: 'status'
+        title: 'Exp', dataIndex: 'expDate', rowKey: 'exp'
+    },
+    {
+        title: 'Status', dataIndex: 'status', rowKey: 'status'
     }
 ];
 
@@ -38,8 +41,8 @@ class RxHistory extends Component {
                 "refills": data.refills,
                 "status": 'filled',
                 "expDate": moment(data.expDate).valueOf()
-            });
-        this.props.fetchRxHistory(this.props.onePatient.data.patientID);
+            }
+        );
     };
 
     handleApprove(data) {
@@ -51,54 +54,72 @@ class RxHistory extends Component {
                 "approved": "true"
             }
         );
-        this.props.fetchRxHistory(this.props.onePatient.data.patientID);
+    };
+
+    checkStatus(data) {
+        if (this.props.provider.type === 'pharmacist') {
+            if (data.status !== 'filled') {
+                return (
+                    data.status = <button
+                        type='button'
+                        onClick={() => {
+                            this.handleFill(data)
+                        }}>
+                        Fill Rx
+                    </button>
+                )
+            }
+            return (data.status = 'Filled')
+        }
+        if (this.props.provider.type === 'insurance') {
+            if (data.status === 'filled') {
+                if (data.approved === 'false') {
+                    return (
+                        data.status = <button
+                            type='button'
+                            onClick={() => {this.handleApprove(data)}}>
+                            Approve Rx
+                        </button>
+                    )
+                }
+                return (data.status = 'Approved')
+            }
+        }
+        return data.status
     };
 
     renderTable() {
+        if (this.props.rxHistory.isFetching) {
+            return (
+                <div className='ant-table-placeholder'>Loading...</div>
+            )
+        }
         if (this.props.rxHistory.rx.rxList) {
-            const rxHistory = this.props.rxHistory.rx.rxList.map(data => {
-                const checkStatus = () => {
-                    if (this.props.provider.type === 'pharmacist') {
-                        if (data.status !== 'filled') {
-                            return (
-                                data.status = <button
-                                                type='button'
-                                                onClick={() => {this.handleFill(data)}}>
-                                                    Fill Rx
-                                              </button>
-                            )
-                        }
-                        return (data.status = 'filled')
-                    }
-                    if (this.props.provider.type === 'insurance') {
-                        if (data.status === 'filled') {
-                            if (data.approved === 'false') {
-                                return (
-                                    data.status = <button
-                                                    type='button'
-                                                    onClick={() => {this.handleApprove(data)}}>
-                                                        Approve Rx
-                                                  </button>
-                                )
-                            }
-                            return ('Approved')
-                        }
-                    }
-                    return (data.status)
-                };
+            const rxHistory = this.props.rxHistory.rx.rxList
+                .map(data => {
+                    data.timestamp = moment(data.timestamp).format('MM/DD/YYYY');
+                    data.expDate = moment(data.expDate).format('MM/DD/YYYY');
+                    data.status = this.checkStatus(data);
+                    return data
+                });
 
-                data.expDate = moment(data.expDate).format('MM/DD/YYYY');
-                data.status = checkStatus();
-                return data;
-            });
+            const reducedHistory = rxHistory.reduce((acc, data) => {
+                if (data.status !== 'filled' && data.approved !== 'true') {
+                    acc.push(data);
+
+                }
+                console.log(acc);
+                return acc;
+            }, []);
+
 
             return (
-                <Table columns={columns} dataSource={rxHistory}/>
+                <Table columns={columns} dataSource={reducedHistory} rowKey={reducedHistory => reducedHistory.rxid}/>
             );
         }
 
         return(
-            <Table columns={columns} />
+            <Table columns={columns} rowKey={null} />
         )
     }
 
@@ -111,8 +132,8 @@ class RxHistory extends Component {
 
 }
 
-const mapStateToProps = ({onePatient, rxHistory, submitRx, approveRx}) => {
-    return {onePatient, rxHistory, submitRx, approveRx}
+const mapStateToProps = ({ onePatient, rxHistory, submitRx, fillRx, approveRx }) => {
+    return {onePatient, rxHistory, submitRx, fillRx, approveRx}
 };
 
 export default connect(mapStateToProps, rxActions)(RxHistory);
