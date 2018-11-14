@@ -4,7 +4,7 @@ import {SUBMITTING_RX, SUBMIT_RX, FAIL_SUBMIT_RX} from '../actions/types';
 const INITIAL_STATE = {
     isFetching: false,
     res: "",
-    error: ""
+    message: ""
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -12,21 +12,24 @@ export default (state = INITIAL_STATE, action) => {
         case SUBMITTING_RX:
             return {
                 type: SUBMITTING_RX,
-                payload: action.payload,
-                message: "Loading Rx History.",
+                payload: "Loading Rx History.",
+                isFetching: true,
+                message: "Rx is fetching."
             };
 
         case SUBMIT_RX:
             return {
                 type: SUBMIT_RX,
                 payload: action.payload,
-                message: "Rx History Loaded."
+                isFetching: false,
+                message: "Rx history loaded."
             };
 
         case FAIL_SUBMIT_RX:
             return {
                 type: FAIL_SUBMIT_RX,
                 payload: action.payload,
+                isFetching: false,
                 message: "Submitting Rx failed."
             };
 
